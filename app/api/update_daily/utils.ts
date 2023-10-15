@@ -28,15 +28,15 @@ export const updateWallet = async (wallet: CusWallet) => {
 const getIncreament = (wallet: CusWallet) => {
   switch (wallet.investment_plan) {
     case Investment_plan.basic:
-      return wallet.current_balance * (3.5 / 100);
+      return wallet.current_balance + wallet.current_balance * (3.5 / 100);
 
     case Investment_plan.standard:
-      return wallet.current_balance * (5 / 100);
+      return wallet.current_balance + wallet.current_balance * (5 / 100);
 
     case Investment_plan.premium:
-      return wallet.current_balance * (7 / 100);
+      return wallet.current_balance + wallet.current_balance * (7 / 100);
     case Investment_plan.gold:
-      return wallet.current_balance * 0.1;
+      return wallet.current_balance + wallet.current_balance * (10 / 100);
 
     default:
       return wallet.current_balance;
