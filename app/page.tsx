@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Navbar } from './components/navbar';
 import { Button } from '@/components/ui/button';
 import { Bitcoin, Info } from 'lucide-react';
 import btcImage from '@/public/images/bitcoin2.avif';
@@ -19,7 +18,6 @@ export default function Home() {
           <div className=" text-ellipsis text-3xl font-inconsolata md:text-6xl w-3/4">
             <h1>Invest in cryptocurrency and</h1>
             <h1>
-              {' '}
               <Bitcoin
                 size={80}
                 className="md:inline-block hidden  text-yellow-600"

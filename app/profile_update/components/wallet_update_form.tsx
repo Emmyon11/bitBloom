@@ -111,7 +111,7 @@ const WalletUpdate = ({
         isOpen: false,
       }));
     } catch (error) {
-      toast.error('something went wrong' + error);
+      toast.error(`something went wrong ${error}`);
     }
   }
   return (
@@ -123,12 +123,12 @@ const WalletUpdate = ({
         <PopoverContent className="w-80 grid gap-5">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(submitWallet)}>
-              <div className=" grid gap-5">
+              <div className="grid gap-5">
                 <div className="flex justify-between items-center">
                   <h1 className="font-bold">Current investment plan: </h1>
                   <h1 className="text-gray-500">{investment_plan}</h1>
                 </div>
-                <div className="">
+                <div>
                   <Label className="text-gray-500">
                     Pay to this btc address
                   </Label>
@@ -148,7 +148,7 @@ const WalletUpdate = ({
                   </div>
                 </div>
               </div>
-              <div className="">
+              <div>
                 <FormField
                   control={form.control}
                   name="amount"
@@ -180,7 +180,6 @@ const WalletUpdate = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        {' '}
                         Upload a screenshot of the transaction
                       </FormLabel>
                       <FormControl>
