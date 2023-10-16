@@ -8,7 +8,7 @@ import {
 import Logo from './logo';
 import { Slider } from './slider';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/store';
 import { getUser } from '../controller/user_slice';
 import { Loader } from 'lucide-react';
@@ -19,28 +19,56 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { USDollarFormat } from '@/utils/currency_formater';
 import { LogoutHoverCard } from './logout_hover';
 import { useRouter } from 'next/navigation';
+import { fetchCryptoData } from '../controller/get_btc_price_slice';
+import FeedbackCard from './feeback_card';
 
 export function Navbar() {
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    const isScrolledDown = prevScrollPos < currentScrollPos;
+
+    setPrevScrollPos(currentScrollPos);
+    setVisible(!isScrolledDown);
+  };
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { user, userData, isLoading, walletData, error } = useAppSelector(
     (state) => state.user
   );
+  const { data } = useAppSelector((state) => state.getCrypto);
 
   if (error) {
     toast.error(error);
   }
 
   useEffect(() => {
+    dispatch(fetchCryptoData());
     dispatch(getUser());
     router.refresh();
   }, []);
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <main className="h-20 w-screen bg-primary drop-shadow-md flex justify-between items-center p-8">
+    <main
+      className={`fixed z-50 top-0 left-0 w-full flex bg-primary shadow-md justify-between p-8 py-4 items-center transition-transform duration-300 transform ${
+        visible ? 'translate-y-0' : '-translate-y-16'
+      }`}
+    >
+      <div className="absolute top-44">
+        <FeedbackCard />
+      </div>
       <Toaster position="top-right" richColors={true} />
       <Logo />
       <div className="md:hidden">
-        <Slider userData={userData} />
+        <Slider userData={userData} crptoPrice={data} walletData={walletData} />
       </div>
       <div className="md:flex gap-10 hidden">
         <div className="text-xl font-roboto_mono font-bold cursor-pointer text-primary-foreground hover:text-yellow-700 duration-300">
@@ -66,7 +94,14 @@ export function Navbar() {
       ) : userData ? (
         <div className=" hidden md:flex  gap-2 items-center justify-center">
           <div className="text-primary-foreground">
+            <h1></h1>
             <h1>
+              {walletData?.current_balance && data.bitcoin.usd !== 0
+                ? `${(walletData.current_balance / data.bitcoin.usd).toFixed(
+                    6
+                  )} BTC`
+                : ''}
+              /
               {walletData?.current_balance
                 ? USDollarFormat.format(walletData?.current_balance)
                 : 'Invest'}

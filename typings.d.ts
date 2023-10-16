@@ -42,3 +42,8 @@ type Wallet = {
   btc_address: string;
   status?: Status;
 };
+
+type Feedback = {
+  name: string;
+  feedback: string;
+};

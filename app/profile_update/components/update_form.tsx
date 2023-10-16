@@ -59,6 +59,7 @@ enum Investment_plan {
 // This can come from your database or API.
 
 export default function ProfileForm() {
+  console.log('mee');
   const [currPlan, setCurrPlan] = useState<Investment_plan>(
     Investment_plan.none
   );
@@ -89,6 +90,10 @@ export default function ProfileForm() {
     },
     mode: 'onChange',
   });
+
+  if (!userData || userData == undefined) {
+    router.push('/');
+  }
 
   //submit function for the form
   async function submit(data: ProfileFormValues) {

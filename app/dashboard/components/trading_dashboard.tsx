@@ -17,6 +17,7 @@ const TradingDashboard = () => {
   const { user, userData, isLoading, walletData, error } = useAppSelector(
     (state) => state.user
   );
+  const { data } = useAppSelector((state) => state.getCrypto);
 
   const tradeDatas = [
     {

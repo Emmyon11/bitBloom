@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import user_slice from '@/app/controller/user_slice';
+import getCrypto from '@/app/controller/get_btc_price_slice';
 
 export const store = configureStore({
   reducer: {
     user: user_slice,
+    getCrypto: getCrypto,
   },
 });
 

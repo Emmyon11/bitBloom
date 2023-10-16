@@ -5,6 +5,7 @@ import btcImage from '@/public/images/bitcoin2.avif';
 import elonImage from '@/public/images/elon.jpeg';
 import SectionTwo from './components/section_two';
 import InvestmentPlans from './components/investment_plan';
+import FeedbackCard from './components/feeback_card';
 
 export default function Home() {
   return (

@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/store';
 import { loginUser } from './login_slice';
 import { Toaster, toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { getUser } from '@/app/controller/user_slice';
 
 export function LoginUserAuthForm() {
   const router = useRouter();
@@ -32,6 +33,7 @@ export function LoginUserAuthForm() {
 
       toast.success('You are now logged in');
       router.refresh();
+      dispatch(getUser());
       router.push('/dashboard');
     } catch (error) {
       toast.error(`An error occurred: ${error}`);

@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+
 import React, { useState } from 'react';
 import avater from '@/public/images/user_avatar.webp';
 import { useAppSelector } from '@/lib/store';
@@ -37,6 +37,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { update_profile_image } from '../utils/update_image';
+import { useRouter } from 'next/navigation';
 
 const getAge = (dob: Date) => {
   const year = dob.getFullYear();
@@ -45,6 +46,7 @@ const getAge = (dob: Date) => {
 };
 
 const Profile = () => {
+  const router = useRouter();
   const { user, userData, isLoading, error } = useAppSelector(
     (state) => state.user
   );
@@ -85,6 +87,10 @@ const Profile = () => {
     } catch (error) {
       toast.error('something went wrong' + error);
     }
+  }
+
+  if (!userData || userData == undefined) {
+    router.push('/');
   }
 
   return (

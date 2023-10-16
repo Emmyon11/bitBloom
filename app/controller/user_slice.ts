@@ -31,7 +31,7 @@ const getUserFunction = async () => {
 
     return { user, currentUser, walletData };
   } catch (error) {
-    return;
+    null;
   }
 };
 
