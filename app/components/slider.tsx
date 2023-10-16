@@ -116,10 +116,12 @@ export function Slider({ userData, crptoPrice, walletData }: Props) {
           />
         ) : userData ? (
           <div className="text-xl font-roboto_mono  flex items-center justify-center ">
-            <Button onClick={logout} variant="destructive">
-              {' '}
-              <SheetClose>Log Out</SheetClose>
-            </Button>
+            <SheetClose asChild>
+              <Button onClick={logout} variant="destructive">
+                {' '}
+                Log Out
+              </Button>
+            </SheetClose>
           </div>
         ) : (
           <div className="grid items-center justify-center gap-3 text-center">

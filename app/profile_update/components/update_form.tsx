@@ -44,7 +44,7 @@ import { update_profile } from '../utils/update_profile';
 import { Toaster, toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import WalletUpdate from './wallet_update_form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export type ProfileFormValues = z.infer<typeof userSchema>;
 
@@ -91,9 +91,11 @@ export default function ProfileForm() {
     mode: 'onChange',
   });
 
-  if (!userData || userData == undefined) {
-    router.push('/');
-  }
+  useEffect(() => {
+    if (!userData || userData == undefined) {
+      router.push('/');
+    }
+  }, []);
 
   //submit function for the form
   async function submit(data: ProfileFormValues) {

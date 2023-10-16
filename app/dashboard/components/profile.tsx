@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import avater from '@/public/images/user_avatar.webp';
 import { useAppSelector } from '@/lib/store';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
@@ -89,10 +89,11 @@ const Profile = () => {
     }
   }
 
-  if (!userData || userData == undefined) {
-    router.push('/');
-  }
-
+  useEffect(() => {
+    if (!userData || userData == undefined) {
+      router.push('/');
+    }
+  }, []);
   return (
     <div className="grid min-h-screen grid-rows-2 p-6 gap-8">
       <div className=" flex flex-col gap-5 items-center h-full justify-center bg-primary p-6 rounded-md shadow-md relative font-nunito">
