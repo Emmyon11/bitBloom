@@ -257,18 +257,20 @@ export default function ProfileForm() {
                       // onValueChange={field.onChange}
                       onValueChange={(value: Investment_plan) => {
                         setCurrPlan(() => value);
-                        if (
-                          value !== investment_plan.enum.none ||
-                          value !== userData?.investment_plan
-                        ) {
+                        if (value === investment_plan.enum.none) {
                           setSlider((slider) => ({
                             ...slider,
-                            isOpen: true,
+                            isOpen: false,
+                          }));
+                        } else if (value === userData?.investment_plan) {
+                          setSlider((slider) => ({
+                            ...slider,
+                            isOpen: false,
                           }));
                         } else {
                           setSlider((slider) => ({
                             ...slider,
-                            isOpen: false,
+                            isOpen: true,
                           }));
                         }
                         if (slider.isSubscribed) {
