@@ -50,6 +50,7 @@ const Profile = () => {
   const { user, userData, isLoading, error } = useAppSelector(
     (state) => state.user
   );
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const MAX_FILE_SIZE = 400000;
   const ACCEPTED_IMAGE_TYPES = [
@@ -90,10 +91,12 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    if (!userData || userData == undefined) {
+    const status = sessionStorage.getItem('isLogin');
+    if (status !== 'true') {
       router.push('/');
     }
   }, []);
+
   return (
     <div className="grid min-h-screen grid-rows-2 p-6 gap-8">
       <div className=" flex flex-col gap-5 items-center h-full justify-center bg-primary p-6 rounded-md shadow-md relative font-nunito">

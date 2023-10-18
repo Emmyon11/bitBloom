@@ -47,7 +47,7 @@ export function Navbar() {
   useEffect(() => {
     dispatch(fetchCryptoData());
     dispatch(getUser());
-    router.refresh();
+    console.log(userData);
   }, []);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -119,14 +119,6 @@ export function Navbar() {
                 />
               </Avatar>
             </LogoutHoverCard>
-            {/* <Image
-              width={50}
-              height={50}
-              src={
-                userData?.profile_picture ? userData?.profile_picture : avater
-              }
-              alt="user avater"
-            /> */}
           </Link>
         </div>
       ) : (
