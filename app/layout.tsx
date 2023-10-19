@@ -47,8 +47,11 @@ export default function RootLayout({
         <div className="min-h-screen">
           <Providers>
             <Navbar />
-            <TradingViewWidgetStrip />
-            <div className="mt-24">{children}</div>
+            <div className="mt-20">
+              <TradingViewWidgetStrip />
+            </div>
+
+            {children}
 
             <Footer />
           </Providers>

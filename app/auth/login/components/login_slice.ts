@@ -14,7 +14,7 @@ export const loginUser = async (loginDetail: LoginDetail) => {
       loginDetail.email,
       loginDetail.password
     );
-    sessionStorage.setItem('isLogin', 'true');
+    localStorage.setItem('isLogin', 'true');
     return session;
   } catch (error) {
     throw error;

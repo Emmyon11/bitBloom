@@ -26,7 +26,7 @@ const getUserFunction = async () => {
       bitcoin_address: userData.bitcoin_address,
       createdAt: userData.createdAt,
     };
-    sessionStorage.setItem('userData', JSON.stringify(currentUser));
+    localStorage.setItem('userData', JSON.stringify(currentUser));
     const walletData = await getWallet(user.$id);
 
     return { user, currentUser, walletData };

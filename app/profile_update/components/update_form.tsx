@@ -74,7 +74,7 @@ export default function ProfileForm() {
   userData = userInfo;
   //check if window is mounted then get userdata from session storage
   if (typeof window !== 'undefined') {
-    const data = sessionStorage.getItem('userData');
+    const data = localStorage.getItem('userData');
     userData = JSON.parse(data!);
   }
 

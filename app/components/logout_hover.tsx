@@ -9,17 +9,20 @@ import { logOut } from '../controller/logout';
 import { useAppDispatch } from '@/lib/store';
 import { clearUser } from '../controller/user_slice';
 import { Toaster, toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 interface Props {
   children: React.ReactNode;
 }
 
 export function LogoutHoverCard({ children }: Props) {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const logout = async () => {
     try {
       await logOut();
       dispatch(clearUser());
       toast.success('logout successful');
+      router.push('/');
     } catch (error) {
       toast.error(`something went wrong: ${error}`);
     }

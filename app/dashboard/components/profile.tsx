@@ -3,7 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import avater from '@/public/images/user_avatar.webp';
 import { useAppSelector } from '@/lib/store';
+import testimonybg from '@/public/images/testimony.jpeg';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+
 import {
   Baby,
   Bitcoin,
@@ -38,6 +40,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { update_profile_image } from '../utils/update_image';
 import { useRouter } from 'next/navigation';
+import { data } from '@/app/controller/testimonies';
+import Swipper from './swipper';
 
 const getAge = (dob: Date) => {
   const year = dob.getFullYear();
@@ -91,14 +95,15 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    const status = sessionStorage.getItem('isLogin');
+    console.log(testimonybg.src);
+    const status = localStorage.getItem('isLogin');
     if (status !== 'true') {
       router.push('/');
     }
   }, []);
 
   return (
-    <div className="grid min-h-screen grid-rows-2 p-6 gap-8">
+    <div className="grid min-h-screen  grid-rows-2 p-6 gap-8">
       <div className=" flex flex-col gap-5 items-center h-full justify-center bg-primary p-6 rounded-md shadow-md relative font-nunito">
         <div className="absolute top-3 left-3">
           <Link href="/profile_update">
@@ -197,30 +202,12 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Card className="h-full">
-        <CardContent className="">
-          <div className="">
-            <Avatar className="w-20 h-20">
-              <AvatarImage src={avater.src} />
-            </Avatar>
-            <h1 className="mt-3">{userData?.name}</h1>
-          </div>
-          <div className="grid gap-3">
-            <div className="flex gap-3 ">
-              <Mail className="text-green-300" />
-              <h1 className="text-gray-600"> {userData?.email}</h1>
-            </div>
-            <div className="flex gap-3">
-              <LineChartIcon className="text-green-300" />
-              <h1 className="text-gray-600"> {userData?.investment_plan}</h1>
-            </div>
-            <div className="flex gap-3">
-              <Baby className="text-green-300" />
-              <h1 className="text-gray-600"> {userData?.dob}</h1>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+
+      <div className="min-w-full gap-5 bg-[url('/_next/static/media/testimony.b1dc5e81.jpeg')] items-center  p-6 md:p-0 h-full justify-centerrounded-md shadow-md rounded-md relative font-nunito overflow-hidden">
+        <div className="">
+          <Swipper />
+        </div>
+      </div>
     </div>
   );
 };

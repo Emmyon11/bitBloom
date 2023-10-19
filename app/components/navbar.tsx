@@ -47,7 +47,9 @@ export function Navbar() {
   useEffect(() => {
     dispatch(fetchCryptoData());
     dispatch(getUser());
-    console.log(userData);
+    if (userData) {
+      localStorage.setItem('userData', JSON.stringify(userData));
+    }
   }, []);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -66,7 +68,10 @@ export function Navbar() {
         <FeedbackCard />
       </div>
       <Toaster position="top-right" richColors={true} />
-      <Logo />
+      <Link href="/">
+        <Logo />
+      </Link>
+
       <div className="md:hidden">
         <Slider userData={userData} crptoPrice={data} walletData={walletData} />
       </div>

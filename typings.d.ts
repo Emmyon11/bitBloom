@@ -47,3 +47,10 @@ type Feedback = {
   name: string;
   feedback: string;
 };
+
+interface Customer {
+  name: string;
+  image: string;
+  testimony: string;
+  date: string;
+}
