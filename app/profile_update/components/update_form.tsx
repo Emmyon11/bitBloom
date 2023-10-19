@@ -240,7 +240,7 @@ export default function ProfileForm() {
             />
             {/*the wallet update component receives the  dropdown select for investment_plan so it can render its popover on it  */}
             <WalletUpdate
-              admin_btc="hdjdjd"
+              admin_btc="1LP54WxCxjxYfJLkRXVkqLVjvGo6CVJhhM"
               investment_plan={currPlan}
               slider={slider}
               setSlider={setSlider}

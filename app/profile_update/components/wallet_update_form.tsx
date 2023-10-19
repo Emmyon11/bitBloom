@@ -120,9 +120,9 @@ const WalletUpdate = ({
         <PopoverTrigger asChild>
           <div>{children}</div>
         </PopoverTrigger>
-        <PopoverContent className="w-80 grid gap-5">
+        <PopoverContent className="w-auto grid gap-5">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(submitWallet)}>
+            <form>
               <div className="grid gap-5">
                 <div className="flex justify-between items-center">
                   <h1 className="font-bold">Current investment plan: </h1>
@@ -135,9 +135,11 @@ const WalletUpdate = ({
                   <div className="flex justify-between items-center bg-primary-foreground p-2 rounded-md">
                     <h1>{admin_btc}</h1>
                     <Button
+                      type="button"
                       onClick={() => {
                         navigator.clipboard.writeText(admin_btc);
                         setIsCopy(true);
+                        alert('Copied to clipboard');
                       }}
                       size="icon"
                       variant="ghost"
